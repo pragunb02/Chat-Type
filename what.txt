@@ -1,0 +1,33 @@
+cd .\client\
+cd .\server\
+navigate to empty folder
+
+server *****
+npm init
+npm i express socket.io
+npm i cors , server and client in different port
+npm install nodemon --save-dev
+
+
+client ********
+npm create vite@latest 
+(project name .   (i.e same folder))
+npm i
+npm install @mui/material @emotion/react @emotion/styled   -- material UI
+npm i socket.io-client 
+(if we use react do this as library)
+(other wise in simple js add this cdn link)
+(
+    <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+</script>
+)
+OR 
+(
+ <script type="module">
+  import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
+
+  const socket = io();
+</script>
+)
