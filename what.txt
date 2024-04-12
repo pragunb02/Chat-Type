@@ -33,7 +33,10 @@ OR
 )
 
 
-
+rs - refresh
 
 server*********
+npm run dev
+
+client*********
 npm run dev
