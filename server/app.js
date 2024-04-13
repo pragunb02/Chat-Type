@@ -32,13 +32,28 @@ io.on("connection", (socket) => {
   console.log("User Connected: ");
   console.log("id: ", socket.id);
 
-  socket.emit("welcome", `Welcome to Our Server ${socket.id}`); // usse socket ko msg
-  //   console.log("lll");
+  // // baar baar emit hota rhega iss liye comment kar diya
+  // socket.emit("welcome", `Welcome to Our Server ${socket.id}`); // usse socket ko msg
+  // //   console.log("lll");
 
-  // wrong
-  //   socket.broadcast.emit("hello ", `Hello to Server ${socket.id}`);
-  socket.broadcast.emit("hello", `Hello to Server ${socket.id}`);
-  //   console.log("lll");
+  // // wrong
+  // //   socket.broadcast.emit("hello ", `Hello to Server ${socket.id}`);
+  // baar baar emit hota rhega iss liye comment kar diya
+  // socket.broadcast.emit("hello", `Hello to Server ${socket.id}`);
+  // //   console.log("lll");
+
+  // socket.on("message", (data) => {
+  //   console.log(data);
+  //   // abb ye data sabhi user ko bhej diya
+  //   io.emit("recieved-message", data);
+  //   socket.broadcast.emit("recieved-message2", data);
+  //   socket.io
+  // });
+
+  socket.on("message", ({ message, room }) => {
+    console.log(room, message);
+    io.to(room).emit("recieved-message", message);
+  });
 
   socket.on("disconnect", () => {
     console.log("USER Disconnected ", socket.id);
