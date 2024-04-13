@@ -51,7 +51,7 @@ io.on("connection", (socket) => {
   // });
 
   socket.on("message", ({ message, room }) => {
-    console.log(room, message);
+    console.log("Room id ", room, " Message ID ", message);
     io.to(room).emit("recieved-message", message);
   });
 

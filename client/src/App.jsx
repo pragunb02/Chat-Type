@@ -56,7 +56,7 @@ const App = () => {
 
     socket.on("recieved-message", (data) => {
       console.log("Received Message: ", data);
-      setMessage((messages) => [...messages, data]);
+      setMessages((messages) => [...messages, data]);
     });
 
     socket.on("recieved-message2", (data) => {
