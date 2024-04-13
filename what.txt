@@ -40,3 +40,7 @@ npm run dev
 
 client*********
 npm run dev
+
+for  authentication 
+server***
+npm i jsonwebtoken cookie-parser

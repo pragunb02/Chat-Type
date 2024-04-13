@@ -2,10 +2,15 @@ import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import cors from "cors";
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 
 const port = 8080;
+const secretKeyJWT = "askd";
+
 const app = express();
 const server = createServer(app);
+
 // const io = new Server(server);
 const io = new Server(server, {
   cors: {
@@ -25,6 +30,31 @@ app.use(
 
 app.get("/", (req, res) => {
   res.send("Hello World");
+});
+
+const users = false;
+// middleware
+app.get("/login", (req, res) => {
+  const token = jwt.sign({ _id: "asdasjdhkasdasdas" }, secretKeyJWT);
+
+  res
+    .cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" })
+    .json({
+      message: "Login Success",
+    });
+});
+
+io.use((socket, next) => {
+  cookieParser()(socket.request, socket.request.res, (err) => {
+    if (err) return next(err);
+
+    const token = socket.request.cookies.token;
+    if (!token) return next(new Error("Authentication Error"));
+
+    const decoded = jwt.verify(token, secretKeyJWT);
+    next();
+  });
+  // if(users) next();
 });
 
 io.on("connection", (socket) => {
@@ -53,6 +83,13 @@ io.on("connection", (socket) => {
   socket.on("message", ({ message, room }) => {
     console.log("Room id ", room, " Message ID ", message);
     io.to(room).emit("recieved-message", message);
+    // similar
+    // socket.to(room).emit("recieved-message", message);
+  });
+
+  socket.on("join-room", (room) => {
+    socket.join(room);
+    console.log(`User Joined ${room}`);
   });
 
   socket.on("disconnect", () => {

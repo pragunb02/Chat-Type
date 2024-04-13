@@ -34,11 +34,11 @@ const App = () => {
 
   console.log(messages);
 
-  // const joinRoomHandler = (e) => {
-  //   e.preventDefault();
-  //   socket.emit("join-room", roomName);
-  //   setRoomName("");
-  // };
+  const joinRoomHandler = (e) => {
+    e.preventDefault();
+    socket.emit("join-room", roomName);
+    setRoomName("");
+  };
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -79,6 +79,21 @@ const App = () => {
       <Typography variant="h6" component="div" gutterBottom>
         {socket.id}
       </Typography>
+
+      <form onSubmit={joinRoomHandler}>
+        <h5>Join Room</h5>
+        <TextField
+          value={roomName}
+          onChange={(e) => setRoomName(e.target.value)}
+          id="outlined-basic"
+          label="Room Name"
+          variant="outlined"
+        />
+
+        <Button type="submit" variant="contained" color="primary">
+          Join
+        </Button>
+      </form>
 
       <form onSubmit={handleSubmit}>
         <TextField
