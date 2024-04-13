@@ -44,3 +44,7 @@ npm run dev
 for  authentication 
 server***
 npm i jsonwebtoken cookie-parser
+
+
+materail UI
+https://mui.com/material-ui/getting-started/installation/
