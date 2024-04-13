@@ -48,3 +48,8 @@ npm i jsonwebtoken cookie-parser
 
 materail UI
 https://mui.com/material-ui/getting-started/installation/
+
+
+docs
+https://socket.io/
+https://socket.io/docs/v4/client-api/
